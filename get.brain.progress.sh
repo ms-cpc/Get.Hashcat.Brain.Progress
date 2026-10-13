@@ -1,10 +1,24 @@
 #!/usr/bin/env bash
-# code generated with assistance of google ai mode, because time is a horrible thing to waste.
-# How it works
-# Looks for the .ldmp file with latest modification time stamp, then calculates its size. 
+###########################################################################
+# Code generated with assistance of Google ai mode, because time is a horrible thing to waste.
+# How it works:
+# It Looks for the .ldmp file with latest modification time stamp, then calculates its size. 
 # Math logic: File size in bytes. remove 40 bytes for header, and then divide by 8 as each candidate stored as an 8 bit hash.
 # C=Candidate, Fb = filesize in bytes 
 # C = (FSb - 40b) / 8
+###########################################################################
+# To run, place in folder running hashcat brain
+# use a second session to run the script in that same folder
+# use -r flag (recurring) to show current status with scrolling update (similar to tail - f)
+# this provides time stamp to allow for rough calculation of speed
+# room for improvement, such as writing to logfile or pushing to a dashboard.
+###########################################################################
+# Don't need the file just want to manually get this?
+# ls -la *.ldmp
+# (figure out which ldmp is the one you want - in this case "XXXXXXXX")
+# python3 -c "import os; print(int((os.path.getsize('brain.XXXXXXXX.ldmp') - 40) / 8))"
+# number should be close approximate to number of candidates tried.
+###########################################################################
 
 # Function to run the calculation once and output a standardized data string
 calculate_progress() {
